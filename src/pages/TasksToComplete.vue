@@ -1,7 +1,7 @@
 <template>
     <div class="row">
-      <div style="padding-left: 50px; width: 500px">
-        <h1>Tasks To Be Completed</h1>
+      <div style="margin-left: 15%; padding-left: 50px; width: 500px">
+        <h1 style="text-align: center;">Tasks To Be Completed</h1>
         <table class="table">
         <thead class="thead-light">
           <tr>

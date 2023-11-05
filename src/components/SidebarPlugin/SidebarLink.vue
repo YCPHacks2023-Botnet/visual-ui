@@ -4,9 +4,10 @@
              class="nav-item"
              v-bind="$attrs"
              tag="li">
-    <a class="nav-link">
+    <a class="nav-link" onmouseover="this.style.textDecoration='underline';" 
+    onmouseout="this.style.textDecoration='none';">
       <slot>
-        <p style="font-size: 16px; text-align:center;">{{name}}</p>
+        <p style="font-size: 16px; text-align:center; word-wrap:">{{name}}</p>
       </slot>
     </a>
   </component>

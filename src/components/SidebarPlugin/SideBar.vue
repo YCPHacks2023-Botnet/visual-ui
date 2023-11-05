@@ -1,6 +1,5 @@
 <template>
-  <div class="sidebar"
-       :data="backgroundColor">
+  <div class="sidebar">
     <!--
             Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black | darkblue"
             Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
@@ -21,8 +20,7 @@
           <sidebar-link v-for="(link,index) in sidebarLinks"
                         :key="index"
                         :to="link.path"
-                        :name="link.name"
-                        :icon="link.icon">
+                        :name="link.name">
           </sidebar-link>
         </slot>
       </ul>
@@ -36,7 +34,7 @@
     props: {
       title: {
         type: String,
-        default: "DotNetBotNet"
+        default: "Bot List"
       },
       backgroundColor: {
         type: String,

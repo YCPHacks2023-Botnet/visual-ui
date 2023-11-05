@@ -5,7 +5,7 @@
         <sidebar-link
           v-for="(link, index) in data"
           :key="index"
-          :to="`/dashboard${link.id}`"
+          :to="`/dashboard/${link.id}`"
           :name="link.name"
         />
       </template>
