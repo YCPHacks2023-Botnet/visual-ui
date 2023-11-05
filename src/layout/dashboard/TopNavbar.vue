@@ -9,10 +9,9 @@
                     class="navbar-toggler"
                     aria-label="Navbar toggle button"
                     @click="toggleSidebar">button
-  
             </button>
           </div>
-          <a class="navbar-brand" style="margin-left: 4%; font-size: 20px; font-weight:bold;" href="#DonaldHake">DotNetBotNet</a>
+          <a class="navbar-brand" style="margin-left: 4%; font-size: 20px; font-weight:bold;" href="">DotNetBotNet</a>
         </div>
       </div>
       <button class="navbar-toggler" type="button"

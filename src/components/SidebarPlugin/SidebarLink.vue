@@ -7,7 +7,7 @@
     <a class="nav-link" onmouseover="this.style.textDecoration='underline';" 
     onmouseout="this.style.textDecoration='none';">
       <slot>
-        <p style="font-size: 16px; text-align:center; word-wrap:">{{name}}</p>
+        <p style="font-size: 16px; text-align:left; word-wrap:">&#128064; {{name}}</p>
       </slot>
     </a>
   </component>

@@ -20,7 +20,7 @@
           <worker-console-output :worker="worker"/>
         </div>
       </template>
-      <template>
+      <template v-else>
         <div class="d-flex justify-content-center align-items-center" style="height: 100vh; padding-left: 500px">
           <div class="jumbotron text-center bg-dark text-white">
             <h1 class="display-4">OH NO!! This Worker Was Not Found!</h1>
