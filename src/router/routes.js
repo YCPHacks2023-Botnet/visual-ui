@@ -4,7 +4,7 @@ import NotFound from "@/pages/NotFoundPage.vue";
 
 // Admin pages
 const Dashboard = () => import(/* webpackChunkName: "dashboard" */"@/pages/Dashboard.vue");
-const TableList = () => import(/* webpackChunkName: "common" */ "@/pages/TableList.vue");
+const TableList = () => import(/* webpackChunkName: "common" */ "@/pages/CompletedTasks.vue");
 
 const routes = [
   {
