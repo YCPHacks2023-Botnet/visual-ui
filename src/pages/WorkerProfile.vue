@@ -4,9 +4,9 @@
       {{worker.name}}
     </div>
     <div class="card-body" style="text-align: left; padding-left:10%; font-size: 24px; color: white;">
-      <p class="card-title">CPU: {{worker.botClientSpecs.cpu}}</p>
-      <p class="card-title">RAM: {{worker.botClientSpecs.ram}}MB</p>
-      <p class="card-text" style="color: white;">Current Progress: {{worker.currentProgress}}</p>
+      <p class="card-title"><strong>CPU:</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{worker.botClientSpecs.cpu}}</p>
+      <p class="card-title"><strong>RAM:</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{worker.botClientSpecs.ram}}MB</p>
+      <p class="card-text" style="color: white;"><strong>Status:</strong> &nbsp;&nbsp;{{worker.currentProgress}}</p>
       <a class="btn btn-info" style="width: 25%; font-size:24px;padding-left: 2%; pointer-events:none;">IP Address: &nbsp;&nbsp;{{ worker.connectionInfo.ip }}</a>
     </div>
     <div class="card-footer text-muted">

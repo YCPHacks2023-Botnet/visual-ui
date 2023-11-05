@@ -1,16 +1,9 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-absolute"
-       :class="{'bg-white': showMenu, 'navbar-transparent': !showMenu}">
+  <nav class="navbar navbar-expand-lg navbar-absolute sticky-top"
+       :class="{'bg-black': !showMenu, 'navbar-transparent': showMenu}">
     <div class="container-fluid" style="border-bottom: 1px solid white;">
       <div class="container-fluid" >
         <div class="navbar-wrapper">
-          <div class="navbar-toggle d-inline" :class="{toggled: $sidebar.showSidebar}">
-            <button type="button"
-                    class="navbar-toggler"
-                    aria-label="Navbar toggle button"
-                    @click="toggleSidebar">button
-            </button>
-          </div>
           <a class="navbar-brand" style="width: 50%; margin: auto 41% ; font-size: 36px; font-weight:bold;" href="">DotNetBotNet</a>
           <div class="col-form-label-sm">
             <button class="badge-pill btn-info" @click="addMoreTasks">Add Tasks</button>
@@ -23,9 +16,6 @@
               data-target="#navigation"
               aria-controls="navigation-index"
               aria-label="Toggle navigation">
-        <span class="navbar-toggler-bar navbar-kebab"></span>
-        <span class="navbar-toggler-bar navbar-kebab"></span>
-        <span class="navbar-toggler-bar navbar-kebab"></span>
       </button>
 
       <collapse-transition>

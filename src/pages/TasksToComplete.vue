@@ -1,7 +1,8 @@
 <template>
-    <div class="row">
-      <div style="margin-left: 15%; padding-left: 50px; width: 500px">
-        <h1 style="text-align: center;">Tasks To Be Completed</h1>
+  <div>
+  <h1 style="text-align: center;">All Tasks Remaining</h1>
+    <div class="row all">
+      <div style="margin-left: 10%; width: 90%">
         <table class="table">
         <thead class="thead-light">
           <tr>
@@ -20,6 +21,7 @@
         </table>
       </div>
     </div>
+  </div>
 </template>
 <script>
 import { BaseTable } from "@/components";
@@ -61,4 +63,8 @@ export default {
 };
 </script>
 <style>
+.all {
+  height: 88vh;
+  overflow-y: auto;
+}
 </style>

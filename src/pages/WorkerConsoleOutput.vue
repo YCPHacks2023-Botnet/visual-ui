@@ -1,4 +1,6 @@
 <template>
+  <div>
+  <h1 style="text-align: center; margin-bottom:2%">Live Terminal Output</h1>
   <div class="terminal" ref="output">
     <div class="output">
       <div v-for="line in lines" :key="line.id" class="line">
@@ -8,6 +10,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -86,9 +89,10 @@ export default {
 .terminal {
   font-family: monospace;
   background-color: black;
-  color: rgb(35,125,247); /* Green text */
-  height: 300px;
+  color: rgb(35,125,247); /* blue text */
+  height: 46vh;
   overflow-y: auto;
+  border: 1px solid white;
 }
 
 .output {
