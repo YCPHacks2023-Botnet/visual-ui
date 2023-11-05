@@ -1,22 +1,23 @@
 <template>
   <div>
     <div class="row">
-      <table-list/>
+      <div class="col-lg">
+        <tasks-to-complete/>
+      </div>
+      <div class="col-lg">
+        <completed-tasks/>
+      </div>
     </div>
   </div>
 </template>
 <script>
-  import LineChart from '@/components/Charts/LineChart';
-  import BarChart from '@/components/Charts/BarChart';
-  import * as chartConfigs from '@/components/Charts/config';
-  import TaskList from './Dashboard/TaskList';
-  import UserTable from './Dashboard/UserTable';
-  import config from '@/config';
-  import TableList from "@/pages/CompletedTasks.vue";
+  import CompletedTasks from "@/pages/CompletedTasks.vue";
+  import TasksToComplete from "@/pages/TasksToComplete.vue";
 
   export default {
     components: {
-      TableList
+      TasksToComplete,
+      CompletedTasks
     },
     data() {
       return {}

@@ -1,7 +1,7 @@
 <template>
     <div class="row">
       <div style="padding-left: 50px; width: 500px">
-        <h1>Completed Tasks</h1>
+        <h1>Tasks To Be Completed</h1>
         <table class="table">
         <thead class="thead-light">
           <tr>
@@ -11,8 +11,8 @@
           </tr>
           </thead>
           <tbody>
-          <tr v-for="(task) in data">
-            <th scope="row">{{task.id}}</th>
+          <tr v-for="(task, index) in data">
+            <th scope="row">{{ task.id }}</th>
             <td>{{task.task}}</td>
             <td>{{task.taskParameters}}</td>
           </tr>
@@ -34,9 +34,11 @@ export default {
       data: []
     };
   },
+  computed: {
+  },
   methods: {
-    getAllCompletedTasks() {
-      axios.get('http://45.55.70.104:8080/Management/getcompletedtasks')
+    getTasksToComplete() {
+      axios.get('http://45.55.70.104:8080/Management/GetWaitingTasks')
         .then((res) => {
           this.data = [];
           this.data = res.data;
@@ -49,11 +51,11 @@ export default {
     }
   },
   mounted() {
-    this.getAllCompletedTasks();
+    this.getTasksToComplete();
 
     // Set up interval to fetch data every second
     setInterval(() => {
-      this.getAllCompletedTasks();
+      this.getTasksToComplete();
     }, 1000);
   }
 };
