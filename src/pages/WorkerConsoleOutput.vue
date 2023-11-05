@@ -1,6 +1,6 @@
 <template>
   <div>
-  <h1 style="text-align: center; margin-bottom:2%">Live Terminal Output</h1>
+  <h3 style="text-align: center; margin-bottom:2%">Live Terminal Output</h3>
   <div class="terminal" ref="output">
     <div class="output">
       <div v-for="line in lines" :key="line.id" class="line">

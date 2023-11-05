@@ -1,6 +1,6 @@
 <template>
   <div>
-  <h1 style="text-align: center;">All Tasks Remaining</h1>
+  <h3 style="text-align: center;">All Tasks Remaining</h3>
     <div class="row all">
       <div style="margin-left: 10%; width: 90%">
         <table class="table">

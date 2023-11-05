@@ -7,9 +7,9 @@
       <p class="card-title"><strong>CPU:</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{worker.botClientSpecs.cpu}}</p>
       <p class="card-title"><strong>RAM:</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{worker.botClientSpecs.ram}}MB</p>
       <p class="card-text" style="color: white;"><strong>Status:</strong> &nbsp;&nbsp;{{worker.currentProgress}}</p>
-      <a class="btn btn-info" style="width: 25%; font-size:24px;padding-left: 2%; pointer-events:none;">IP Address: &nbsp;&nbsp;{{ worker.connectionInfo.ip }}</a>
+      <p class="card-text" style="color: white;">IP Address: &nbsp;&nbsp;{{ worker.connectionInfo.ip }}</p>
     </div>
-    <div class="card-footer text-muted">
+    <div class="card-footer text" style="color:white;">
       Last Heard From <strong>{{((utcTime) => ((hours) => `${(hours < 12 ? hours : hours - 12).toString().padStart(2, '0')}:${utcTime.slice(3, 5)}:${utcTime.slice(6, 8)} ${hours < 12 ? 'AM' : 'PM'}`)((parseInt(utcTime.slice(0, 2)) - 5 + 24) % 24))((worker.connectionInfo.lastHeardFrom).split("T")[1].slice(0, 8))}}</strong>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-      <h1 style="width: 50%; margin-left: auto; margin-right: auto; margin-bottom: 1%; margin-top:0%;text-align: center; margin-bottom:2%">Completed Tasks</h1>
+      <h3 style="width: 50%; margin-left: auto; margin-right: auto; margin-bottom: 1%; margin-top:0%;text-align: center; margin-bottom:2%">Completed Tasks</h3>
       <div style="padding: 0px 5px; width: 100%; margin-left: 0%; margin-right: 2%; height: 46vh; overflow-y:auto">
         <table class="table" style="overflow-y:auto">
         <thead class="thead-light">
