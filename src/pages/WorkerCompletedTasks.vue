@@ -1,7 +1,7 @@
 <template>
     <div class="row">
-      <div style="padding-left: 50px; width: 500px">
-        <h1>Tasks Completed</h1>
+      <div style="padding: 0px 5px; width: 100%; margin-left: 0%; margin-right: 2%;">
+        <h1 style="text-align: center; margin-bottom:2%">Tasks Completed</h1>
         <table class="table">
         <thead class="thead-light">
           <tr>
@@ -12,9 +12,9 @@
           </thead>
           <tbody>
           <tr v-for="(task) in worker.completedTasks">
-            <th scope="row">{{ task.id }}</th>
-            <td>{{task.task}}</td>
-            <td>{{task.taskParameters}}</td>
+            <th scope="row" style="padding: 0px 10px;">{{ task.id }}</th>
+            <td style="padding: 0px 10px;">{{task.task}}</td>
+            <td style="padding: 10px 10px;">{{task.taskParameters}}</td>
           </tr>
           </tbody>
         </table>

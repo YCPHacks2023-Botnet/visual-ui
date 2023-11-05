@@ -1,8 +1,8 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-absolute"
        :class="{'bg-white': showMenu, 'navbar-transparent': !showMenu}">
-    <div class="container-fluid">
-      <div class="container-fluid">
+    <div class="container-fluid" style="border-bottom: 1px solid white;">
+      <div class="container-fluid" >
         <div class="navbar-wrapper">
           <div class="navbar-toggle d-inline" :class="{toggled: $sidebar.showSidebar}">
             <button type="button"
@@ -11,7 +11,7 @@
                     @click="toggleSidebar">button
             </button>
           </div>
-          <a class="navbar-brand" style="margin-left: 4%; font-size: 20px; font-weight:bold;" href="">DotNetBotNet</a>
+          <a class="navbar-brand" style="width: 50%; margin: auto 41% ; font-size: 36px; font-weight:bold;" href="">DotNetBotNet</a>
         </div>
       </div>
       <button class="navbar-toggler" type="button"

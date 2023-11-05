@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="width:80%; margin: 4% 15%;">
     <div class="row">
       <template v-if="id === null">
         <div class="col-lg">
@@ -12,7 +12,7 @@
       <template v-else-if="worker.id">
         <worker-profile
           :worker="worker"
-        />
+        style="margin-top:0%;"/>
         <div class="col-lg">
           <worker-completed-tasks :worker="worker"/>
         </div>

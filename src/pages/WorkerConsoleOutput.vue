@@ -86,7 +86,7 @@ export default {
 .terminal {
   font-family: monospace;
   background-color: black;
-  color: #00ff00; /* Green text */
+  color: rgb(35,125,247); /* Green text */
   height: 300px;
   overflow-y: auto;
 }
@@ -100,7 +100,7 @@ export default {
 }
 
 .output {
-  color: #00ff00; /* Green text */
+  color: rgb(52, 136, 253); /* Green text */
 }
 
 .cursor {
