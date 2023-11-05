@@ -1,5 +1,5 @@
 <template>
-  <div class="row"><h3>Starter page</h3></div>
+  <div class="row"><h1>JORDAN LIKES WEINERS</h1></div>
 </template>
 <script>
 export default {
