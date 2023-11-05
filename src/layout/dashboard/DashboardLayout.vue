@@ -60,6 +60,10 @@ export default {
   },
   mounted() {
     this.getAllWorkers();
+
+    setInterval(() => {
+      this.getAllWorkers();
+    }, 1000);
   }
 };
 </script>

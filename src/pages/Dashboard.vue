@@ -74,6 +74,13 @@
         this.id = this.$route.params.id;
         this.getTasksToComplete()
       }
+    },
+    mounted() {
+      if (this.id) {
+        setInterval(() => {
+          this.getTasksToComplete();
+        }, 5000);
+      }
     }
   };
 </script>
