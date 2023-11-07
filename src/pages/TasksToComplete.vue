@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     getTasksToComplete() {
-      axios.get('http://45.55.70.104:8080/Management/GetWaitingTasks')
+      axios.get('http://45.55.105.65:8080/Management/GetWaitingTasks')
         .then((res) => {
           this.data = [];
           this.data = res.data;
