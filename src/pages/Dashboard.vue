@@ -58,7 +58,7 @@
     },
     methods: {
       getTasksToComplete() {
-        axios.get(`http://45.55.70.104:8080/Management/GetBotInfo?bot_id=${this.id}`)
+        axios.get(`http://45.55.105.65:8080/Management/GetBotInfo?bot_id=${this.id}`)
           .then((res) => {
             this.worker = new WorkerAdapter(res.data.bot);
             // state.commit(StoreMutations.SET_ALL_COMPLETED_TASKS, res.data);
