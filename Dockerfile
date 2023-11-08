@@ -1,23 +1,20 @@
 # Use an official Node.js runtime as the base image
-FROM node:14
+FROM node:18.13.0
 
-# Set the working directory in the container
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the container
+# Copy the package.json and package-lock.json files to the container
 COPY package*.json ./
 
 # Install project dependencies
-RUN npm install
+RUN npm i --force
 
-# Copy the rest of the application code to the container
+# Copy all project files to the container
 COPY . .
 
-# Build your Vue.js application (if applicable)
-RUN npm run build
+# Expose the port that the Vue.js app will run on
+EXPOSE 8081
 
-# Expose the port your application will run on
-EXPOSE 3000
-
-# Start your application
-CMD [ "npm", "serve" ]
+# Command to start the Vue.js application
+CMD ["npm", "run", "serve"]
