@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h3 style="text-align: center;margin-left: 5%">All Tasks Completed</h3>
+    <h3 style="text-align: center;margin-left: 0%">All Tasks Completed</h3>
     <div class="row all">
-      <div style="width: 100%; margin-left: 10%">
+      <div style="width: 100%; margin-left: 5%">
         <table class="table">
         <thead class="thead-light">
           <tr>

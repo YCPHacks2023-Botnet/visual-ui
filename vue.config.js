@@ -2,6 +2,9 @@ const webpack = require('webpack');
 
 module.exports = {
   lintOnSave: false,
+  devServer: {
+      disableHostCheck : true
+  },
   configureWebpack: {
     // Set up all the aliases we use in our app.
     resolve: {

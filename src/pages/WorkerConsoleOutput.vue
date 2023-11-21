@@ -89,7 +89,7 @@ export default {
 .terminal {
   font-family: monospace;
   background-color: black;
-  color: rgb(35,125,247); /* blue text */
+  color: rgb(63, 247, 35); /* blue text */
   height: 46vh;
   overflow-y: auto;
   border: 1px solid white;
@@ -104,7 +104,7 @@ export default {
 }
 
 .output {
-  color: rgb(52, 136, 253); /* Green text */
+  color: rgb(72, 253, 52); /* Green text */
 }
 
 .cursor {

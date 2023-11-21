@@ -1,11 +1,9 @@
 version: '3'
 services:
-  frontend:
-    image: nginx:alpine
+  vue-app:
     build:
       context: .
       dockerfile: Dockerfile
-    volumes:
-      - ./dist:/usr/share/nginx/html
+    image: robwoodd/visual-ui
     ports:
-      - "80:80"
+      - "8081:8081"
