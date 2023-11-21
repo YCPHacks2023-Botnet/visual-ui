@@ -1,6 +1,9 @@
 <template>
   <div style="width:80%; margin: 4% 15%;">
     <div class="row">
+      <map-component
+        :locations="locations"
+      />
       <template v-if="id === null">
         <div class="col-lg">
           <tasks-to-complete/>
@@ -41,9 +44,11 @@
   import WorkerConsoleOutput from "@/pages/WorkerConsoleOutput.vue";
   import axios from "axios";
   import WorkerAdapter from "@/pages/store/adapter/WorkerAdapter";
+  import MapComponent from "@/pages/MapComponent.vue";
 
   export default {
     components: {
+      MapComponent,
       WorkerConsoleOutput,
       WorkerProfile,
       WorkerCompletedTasks,
@@ -53,12 +58,17 @@
     data() {
       return {
         id: null,
-        worker: new WorkerAdapter()
+        worker: new WorkerAdapter(),
+        locations: [
+          [37.7749, -122.4194], // San Francisco
+          [40.7128, -74.0060],  // New York
+          // Add more locations as needed
+        ],
       }
     },
     methods: {
       getTasksToComplete() {
-        axios.get(`http://45.55.70.104:8080/Management/GetBotInfo?bot_id=${this.id}`)
+        axios.get(`http://45.55.105.65:8080/Management/GetBotInfo?bot_id=${this.id}`)
           .then((res) => {
             this.worker = new WorkerAdapter(res.data.bot);
             // state.commit(StoreMutations.SET_ALL_COMPLETED_TASKS, res.data);

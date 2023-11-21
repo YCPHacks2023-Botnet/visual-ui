@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     getAllCompletedTasks() {
-      axios.get('http://45.55.70.104:8080/Management/getcompletedtasks')
+      axios.get('http://45.55.105.65:8080/Management/getcompletedtasks')
         .then((res) => {
           this.data = [];
           this.data = res.data;

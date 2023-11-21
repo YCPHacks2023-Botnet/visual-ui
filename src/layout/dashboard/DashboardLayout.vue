@@ -44,7 +44,7 @@ export default {
       }
     },
     getAllWorkers() {
-      axios.get('http://45.55.70.104:8080/Management/GetBots')
+      axios.get('http://45.55.105.65:8080/Management/GetBots')
         .then((res) => {
           this.data = [];
           this.data = res.data.bots;
