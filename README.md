@@ -23,7 +23,7 @@ We are very excited to share this dashboard with you and we look forward to hear
 * [Documentation](#documentation)
 * [File Structure](#file-structure)
 * [Browser Support](#browser-support)
-* [Resources](https://creative-tim.com)
+* [Resources]()
 * [Reporting Issues](#reporting-issues)
 * [Technical Support or Questions](#technical-support-or-questions)
 * [Licensing](#licensing)
