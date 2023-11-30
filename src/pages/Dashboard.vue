@@ -12,7 +12,7 @@
       <template v-else-if="worker.id">
         <worker-profile
           :worker="worker"
-        style="margin-top:0%;"/>
+        style="margin-top:0;"/>
         <div class="col-lg">
           <worker-completed-tasks :worker="worker"/>
         </div>
