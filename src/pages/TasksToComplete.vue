@@ -27,6 +27,7 @@
 import { BaseTable } from "@/components";
 import axios from "axios";
 import IpConstants from "@/pages/store/IpConstants";
+import Cookies from "js-cookie";
 
 export default {
   components: {
@@ -41,16 +42,23 @@ export default {
   },
   methods: {
     getTasksToComplete() {
-      axios.get(`http://${IpConstants}:8080/Management/GetWaitingTasks`)
-        .then((res) => {
-          this.data = [];
-          this.data = res.data;
-          // state.commit(StoreMutations.SET_ALL_COMPLETED_TASKS, res.data);
-        })
-        .catch((error) => {
-          // eslint-disable-next-line
-          console.error(error);
-        });
+      // Retrieve the value of the 'user' cookie
+      const user = Cookies.get('user');
+      if (user) {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${user}`
+        axios.get(`http://${IpConstants}:8080/Management/GetWaitingTasks`)
+          .then((res) => {
+            this.data = [];
+            this.data = res.data;
+          })
+          .catch((error) => {
+            // eslint-disable-next-line
+            if (error.response.status === 401) {
+              Cookies.remove('user');
+            } else
+              console.error(error);
+          });
+      }
     }
   },
   mounted() {
@@ -59,7 +67,7 @@ export default {
     // Set up interval to fetch data every second
     setInterval(() => {
       this.getTasksToComplete();
-    }, 1000);
+    }, 10000);
   }
 };
 </script>

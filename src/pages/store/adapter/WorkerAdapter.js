@@ -9,5 +9,6 @@ export default class WorkerAdapter {
     this.name = adapter.name || '';
     this.output = adapter.output || '';
     this.taskId = adapter.taskId || '';
+    this.locationInfo = adapter.locationInfo;
   }
 }

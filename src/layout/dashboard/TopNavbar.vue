@@ -21,7 +21,7 @@
                   <div class="text-center mb-4" style="color:white;">
                     <blockquote>Sign in to use .NETBotNet</blockquote>
                   </div>
-                  <form role="form">
+                  <form role="form" @submit.prevent="login">
                     <base-input alternative
                                 class="mb-3"
                                 v-model="username"
@@ -115,6 +115,7 @@
   import axios from "axios";
   import WorkerAdapter from "@/pages/store/adapter/WorkerAdapter";
   import IpConstants from "@/pages/store/IpConstants";
+  import Cookies from 'js-cookie';
 
   export default {
     components: {
@@ -193,32 +194,27 @@
         this.interval = 15;
       },
       login() {
-        // Get the values from the username and password fields
-        const enteredEmail = this.username;
-        const enteredPassword = this.password;
+        axios.post(`http://${IpConstants}:8080/Management/Login`, { Username: this.username, Password: this.password}, null)
+          .then(resp => {
+            console.log(resp)
+            // Successful login
+            console.log("Login successful");
+            this.loginFailure = false; // takes away error message
+            this.showLogin = false; // hides login modal
+            this.isDisabled = false; // enables the add tasks button
+            this.loggedIn = true;
 
-        // Hardcoded values for comparison
-        const hardcodedEmail = "admin";
-        const hardcodedPassword = "root";
-
-        // Compare the entered values with the hardcoded ones
-        if (enteredEmail === hardcodedEmail && enteredPassword === hardcodedPassword) {
-          // Successful login
-          console.log("Login successful");
-          this.loginFailure = false; // takes away error message
-          this.showLogin = false; // hides login modal
-          this.isDisabled = false; // enables the add tasks button
-          this.loggedIn = true;
-
-          // if remember me was checked
-          if (this.remember === true) {
-            console.log("we need to do something with this");
-          }
-        } else {
-          // Invalid credentials
-          console.log("Invalid username or password");
-          this.loginFailure = true;
-        }
+            // if remember me was checked
+            if (this.remember === true) {
+              console.log("we need to do something with this");
+            }
+            Cookies.set('user', resp.data, { expires: 1 });
+          })
+          .catch(() => {
+            // Invalid credentials
+            console.log("Invalid username or password");
+            this.loginFailure = true;
+          })
       },
       getUsernameForButton() {
         return "Hello, " + this.username + "!";
@@ -232,5 +228,3 @@
     }
   };
 </script>
-<style>
-</style>

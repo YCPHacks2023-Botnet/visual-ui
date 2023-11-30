@@ -1,7 +1,9 @@
 <template>
   <div style="width:80%; margin: 4% 15%;">
     <div class="row">
-      <map-component/>
+      <map-component
+        :location-list="this.worker.locationInfo"
+      />
       <template v-if="id === null">
         <div class="col-lg">
           <tasks-to-complete/>
@@ -44,6 +46,8 @@
   import WorkerAdapter from "@/pages/store/adapter/WorkerAdapter";
   import MapComponent from "@/pages/MapComponent.vue";
   import IpConstants from "@/pages/store/IpConstants";
+  import Cookies from "js-cookie";
+  import LocationAdapter from "@/pages/store/adapter/LocationAdapter";
 
   export default {
     components: {
@@ -58,25 +62,48 @@
       return {
         id: null,
         worker: new WorkerAdapter(),
-        locations: [
-          [37.7749, -122.4194], // San Francisco
-          [40.7128, -74.0060],  // New York
-          // Add more locations as needed
-        ],
+        locationData: new LocationAdapter()
       }
     },
     methods: {
       getTasksToComplete() {
-        axios.get(`http://${IpConstants}:8080/Management/GetBotInfo?bot_id=${this.id}`)
-          .then((res) => {
-            this.worker = new WorkerAdapter(res.data.bot);
-            // state.commit(StoreMutations.SET_ALL_COMPLETED_TASKS, res.data);
-          })
-          .catch((error) => {
-            // eslint-disable-next-line
-            console.error(error);
-          });
-      }
+        // Retrieve the value of the 'user' cookie
+        const user = Cookies.get('user');
+        if (user) {
+          axios.defaults.headers.common['Authorization'] = `Bearer ${user}`
+          axios.get(`http://${IpConstants}:8080/Management/GetBotInfo?bot_id=${this.id}`)
+            .then((res) => {
+              this.worker = new WorkerAdapter(res.data.bot);
+              // state.commit(StoreMutations.SET_ALL_COMPLETED_TASKS, res.data);
+            })
+            .catch((error) => {
+              // eslint-disable-next-line
+              if (error.response.status === 401) {
+                Cookies.remove('user');
+              } else
+                console.error(error);
+            });
+        }
+      },
+      getAllWorkers() {
+        // Retrieve the value of the 'user' cookie
+        const user = Cookies.get('user');
+        if (user) {
+          axios.defaults.headers.common['Authorization'] = `Bearer ${user}`
+          axios.get(`http://${IpConstants}:8080/Management/GetBots`)
+            .then((res) => {
+              this.data = [];
+              this.locationData = res.data.map(bot => { new LocationAdapter(bot) });
+            })
+            .catch((error) => {
+              // eslint-disable-next-line
+              if (error.response.status === 401) {
+                Cookies.remove('user');
+              } else
+                console.error(error);
+            });
+        }
+      },
     },
     created() {
       if (this.$route.params.id) {
