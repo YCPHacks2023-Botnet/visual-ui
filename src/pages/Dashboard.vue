@@ -2,7 +2,7 @@
   <div style="width:80%; margin: 4% 15%;">
     <div class="row">
       <map-component
-        :location-list="this.worker.locationInfo"
+        :location-list="locationData"
       />
       <template v-if="id === null">
         <div class="col-lg">
@@ -62,7 +62,7 @@
       return {
         id: null,
         worker: new WorkerAdapter(),
-        locationData: new LocationAdapter()
+        locationData: []
       }
     },
     methods: {
@@ -92,8 +92,9 @@
           axios.defaults.headers.common['Authorization'] = `Bearer ${user}`
           axios.get(`http://${IpConstants}:8080/Management/GetBots`)
             .then((res) => {
-              this.data = [];
-              this.locationData = res.data.map(bot => { new LocationAdapter(bot) });
+              this.locationData = [];
+
+              this.locationData = res.data.bots
             })
             .catch((error) => {
               // eslint-disable-next-line
@@ -115,6 +116,10 @@
       if (this.id) {
         setInterval(() => {
           this.getTasksToComplete();
+        }, 5000);
+      } else {
+        setInterval(() => {
+          this.getAllWorkers();
         }, 5000);
       }
     }
