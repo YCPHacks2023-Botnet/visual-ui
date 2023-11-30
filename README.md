@@ -13,18 +13,17 @@
 Vue Black Dashboard features over 16 individual components, giving you the freedom of choosing and combining. This means that there are thousands of possible combinations. All components can take variations in color, that you can easily modify using SASS files. You will save a lot of time going from prototyping to full-functional code because all elements are implemented.
 We thought about everything, so this dashboard comes with 2 versions, Dark Mode and Light Mode.
 
-We are very excited to share this dashboard with you and we look forward to hearing your feedback!
+We are very excited to share this dashboard with you, and we look forward to hearing your feedback!
 
 
 ## Table of Contents
-
 
 * [Demo](#demo)
 * [Quick Start](#quick-start)
 * [Documentation](#documentation)
 * [File Structure](#file-structure)
 * [Browser Support](#browser-support)
-* [Resources](#resources)
+* [Resources]()
 * [Reporting Issues](#reporting-issues)
 * [Technical Support or Questions](#technical-support-or-questions)
 * [Licensing](#licensing)
@@ -45,7 +44,7 @@ We are very excited to share this dashboard with you and we look forward to hear
 ## Quick start
 
 - Clone the repo: `git clone https://github.com/creativetimofficial/vue-black-dashboard.git`.
-- [Download from Github](https://github.com/creativetimofficial/vue-black-dashboard/archive/master.zip).
+- [Download from GitHub](https://github.com/creativetimofficial/vue-black-dashboard/archive/master.zip).
 - [Download from Creative Tim](https://www.creative-tim.com/product/vue-black-dashboard).
 
 
@@ -58,7 +57,7 @@ Within the download you'll find the following directories and files:
 
 ```
 |-- Vue Black Dashboard
-    |-- .babelrc  
+    |-- .babelrc
     |-- .env
     |-- .eslintrc
     |-- .gitattributes
@@ -165,7 +164,7 @@ Within the download you'll find the following directories and files:
 
 At present, we officially aim to support the last two versions of the following browsers:
 
-<img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/chrome.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/firefox.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/edge.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/safari.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/opera.png" width="64" height="64">
+<img alt="" src="https://s3.amazonaws.com/creativetim_bucket/github/browser/chrome.png" width="64" height="64"> <img alt="" src="https://s3.amazonaws.com/creativetim_bucket/github/browser/firefox.png" width="64" height="64"> <img alt="" src="https://s3.amazonaws.com/creativetim_bucket/github/browser/edge.png" width="64" height="64"> <img alt="" src="https://s3.amazonaws.com/creativetim_bucket/github/browser/safari.png" width="64" height="64"> <img alt="" src="https://s3.amazonaws.com/creativetim_bucket/github/browser/opera.png" width="64" height="64">
 
 
 
