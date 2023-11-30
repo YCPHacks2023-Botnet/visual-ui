@@ -26,6 +26,7 @@
 <script>
 import { BaseTable } from "@/components";
 import axios from "axios";
+import IpConstants from "@/pages/store/IpConstants";
 
 export default {
   components: {
@@ -38,7 +39,7 @@ export default {
   },
   methods: {
     getAllCompletedTasks() {
-      axios.get('http://45.55.105.65:8080/Management/getcompletedtasks')
+      axios.get(`http://${IpConstants}:8080/Management/getcompletedtasks`)
         .then((res) => {
           this.data = [];
           this.data = res.data;

@@ -1,9 +1,7 @@
 <template>
   <div style="width:80%; margin: 4% 15%;">
     <div class="row">
-      <map-component
-        :locations="locations"
-      />
+      <map-component/>
       <template v-if="id === null">
         <div class="col-lg">
           <tasks-to-complete/>
@@ -45,6 +43,7 @@
   import axios from "axios";
   import WorkerAdapter from "@/pages/store/adapter/WorkerAdapter";
   import MapComponent from "@/pages/MapComponent.vue";
+  import IpConstants from "@/pages/store/IpConstants";
 
   export default {
     components: {
@@ -68,7 +67,7 @@
     },
     methods: {
       getTasksToComplete() {
-        axios.get(`http://45.55.105.65:8080/Management/GetBotInfo?bot_id=${this.id}`)
+        axios.get(`http://${IpConstants}:8080/Management/GetBotInfo?bot_id=${this.id}`)
           .then((res) => {
             this.worker = new WorkerAdapter(res.data.bot);
             // state.commit(StoreMutations.SET_ALL_COMPLETED_TASKS, res.data);

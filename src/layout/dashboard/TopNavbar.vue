@@ -35,6 +35,7 @@
   import Modal from '@/components/Modal';
   import axios from "axios";
   import WorkerAdapter from "@/pages/store/adapter/WorkerAdapter";
+  import IpConstants from "@/pages/store/IpConstants";
 
   export default {
     components: {
@@ -78,7 +79,7 @@
         this.showMenu = !this.showMenu;
       },
       addMoreTasks() {
-        axios.post(`http://45.55.105.65:8080/Management/QueueTask`, {
+        axios.post(`http://${IpConstants}:8080/Management/QueueTask`, {
           Task: "DDOS",
           Count: 100,
           TaskParameters: {

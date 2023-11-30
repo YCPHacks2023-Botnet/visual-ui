@@ -16,8 +16,6 @@
       <dashboard-content @click.native="toggleSidebar">
 
       </dashboard-content>
-
-      <content-footer></content-footer>
     </div>
   </div>
 </template>
@@ -27,6 +25,7 @@
 import TopNavbar from "./TopNavbar.vue";
 import DashboardContent from "./Content.vue";
 import axios from "axios";
+import IpConstants from "@/pages/store/IpConstants";
 export default {
   components: {
     TopNavbar,
@@ -44,11 +43,10 @@ export default {
       }
     },
     getAllWorkers() {
-      axios.get('http://45.55.105.65:8080/Management/GetBots')
+      axios.get(`http://${IpConstants}:8080/Management/GetBots`)
         .then((res) => {
           this.data = [];
           this.data = res.data.bots;
-          // state.commit(StoreMutations.SET_ALL_COMPLETED_TASKS, res.data);
         })
         .catch((error) => {
           // eslint-disable-next-line
