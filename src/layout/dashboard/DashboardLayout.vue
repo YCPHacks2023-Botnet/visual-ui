@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <side-bar>
+    <side-bar style="margin-top: 7%;">
       <template slot="links">
         <sidebar-link
           v-for="(link, index) in data"
@@ -19,7 +19,7 @@
         <br>
         <br>
         <br>
-        <div class="wrapper wrapper-full-page section content">
+        <div class="wrapper wrapper-full-page section content" style="margin-left: 10%;margin-top: 10%">
           <div class="">
             <div class="container">
               <div class="row">

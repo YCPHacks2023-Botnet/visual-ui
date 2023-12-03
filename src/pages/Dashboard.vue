@@ -5,17 +5,19 @@
         :location-list="locationData"
       />
       <template v-if="id === null">
-        <div class="col-lg">
-          <tasks-to-complete/>
-        </div>
-        <div class="col-lg">
-          <completed-tasks/>
+        <div class="" style="display: flex; margin-top: 5%; width: 110%;">
+          <div  style="margin-right: 5%; width: 45%;">
+            <tasks-to-complete/>
+          </div>
+          <div style="margin-left: 0%; width: 45%;">
+            <completed-tasks/>
+          </div>
         </div>
       </template>
       <template v-else-if="worker.id">
         <worker-profile
           :worker="worker"
-        style="margin-top:0;"/>
+        style="margin-top: 2%"/>
         <div class="col-lg">
           <worker-completed-tasks :worker="worker"/>
         </div>

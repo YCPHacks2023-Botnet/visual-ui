@@ -1,7 +1,10 @@
 <template>
   <div>
-    <div id="map" style="height: 500px; width: 800px"></div>
-    <button @click="reloadMap">Reload Map</button>
+    <div style="margin-left: 0%; margin-top: 5%; width: auto;">
+      <h1 style="margin-left: 40%;">Bot Locations</h1>
+      <div id="map" style="margin-top:2%;height: 500px; width: 1000px"></div>
+      <button @click="reloadMap">Reload Map</button>
+    </div>
   </div>
 </template>
 
