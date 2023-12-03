@@ -6,7 +6,7 @@
         <div class="navbar-wrapper">
           <a class="navbar-brand" style="width: 50%; margin: auto 41% ; font-size: 36px; font-weight:bold;" href="">DotNetBotNet</a>
           <div class="" style="display: inline-flex; width: 25%;">
-            <base-button v-if="loggedIn === false" block type="default" class=" mb-3" @click="showLogin = true" style="width: 48%;
+            <base-button v-if="isLoggedIn === false" block type="default" class=" mb-3" @click="showLogin = true" style="width: 48%;
                                       padding-left:5%;padding-right:5%;margin-right: 1%;text-align:center;color:white;">
               Sign In
             </base-button>
@@ -45,7 +45,7 @@
                 </template>
               </card>
             </modal>
-            <base-dropdown v-if="loggedIn === true"
+            <base-dropdown v-if="isLoggedIn === true"
                            block type="default"
                            title-classes="btn btn-info"
                            style="width: 48%;
@@ -116,6 +116,7 @@
   import WorkerAdapter from "@/pages/store/adapter/WorkerAdapter";
   import IpConstants from "@/pages/store/IpConstants";
   import Cookies from 'js-cookie';
+  import {getJwtTokenFromCookie, getUserNameFromCookie} from "@/pages/store/adapter/cookieUtils";
 
   export default {
     components: {
@@ -138,6 +139,7 @@
         searchModalVisible: false,
         searchQuery: '',
 
+        isLoggedIn: false,
         showLogin: false,
         enableTasksButton: false,
         remember: false,
@@ -146,7 +148,6 @@
         password: '',
         isDisabled: true,
         loginFailure: false,
-        loggedIn: false,
         numTasks: 100,
         interval: 15
       };
@@ -202,13 +203,20 @@
             this.loginFailure = false; // takes away error message
             this.showLogin = false; // hides login modal
             this.isDisabled = false; // enables the add tasks button
-            this.loggedIn = true;
+            this.isLoggedIn = true;
 
             // if remember me was checked
             if (this.remember === true) {
               console.log("we need to do something with this");
             }
-            Cookies.set('user', resp.data, { expires: 1 });
+            // Assuming resp.data contains the JWT and this.username contains the username
+            const jwtToken = resp.data;
+            const username = this.username;
+            // Convert the object to a JSON string
+            const jsonString = JSON.stringify({ jwtToken, username });
+
+            // Set the cookie with the JWT and username
+            Cookies.set('user', jsonString, { expires: 1 });
           })
           .catch(() => {
             // Invalid credentials
@@ -217,14 +225,24 @@
           })
       },
       getUsernameForButton() {
-        return "Hello, " + this.username + "!";
+        return "Hello, " + getUserNameFromCookie() + "!";
       },
       logout() {
         this.username = '';
         this.password = '';
-        this.loggedIn = false;
         this.isDisabled = true;
-      }
+        Cookies.remove('user');
+        this.isLoggedIn = false;
+      },
+      loggedIn() {
+        const jwtToken = getJwtTokenFromCookie()
+        if (jwtToken !== undefined && jwtToken !== false)
+          this.isLoggedIn = true;
+        return jwtToken !== undefined && jwtToken !== false
+      },
+    },
+    mounted() {
+      this.loggedIn();
     }
   };
 </script>

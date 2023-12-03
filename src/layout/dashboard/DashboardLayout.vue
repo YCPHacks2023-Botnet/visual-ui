@@ -13,7 +13,27 @@
     <div class="main-panel">
       <top-navbar></top-navbar>
 
-      <dashboard-content @click.native="toggleSidebar">
+      <template v-if="this.isLoggedIn === false">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="wrapper wrapper-full-page section content">
+          <div class="">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center">
+                  <h2 class="title text-danger">Please Login</h2>
+                  <h2 class="title">Oops! It seems like you're not logged in.</h2>
+                  <h2 class="title">You should probably do that.</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+      <dashboard-content @click.native="toggleSidebar" v-else>
 
       </dashboard-content>
     </div>
@@ -27,6 +47,7 @@ import DashboardContent from "./Content.vue";
 import axios from "axios";
 import IpConstants from "@/pages/store/IpConstants";
 import Cookies from "js-cookie";
+import {getJwtTokenFromCookie} from "@/pages/store/adapter/cookieUtils";
 
 export default {
   components: {
@@ -35,7 +56,8 @@ export default {
   },
   data() {
     return {
-      data: []
+      data: [],
+      isLoggedIn: false
     }
   },
   methods: {
@@ -45,14 +67,14 @@ export default {
       }
     },
     getAllWorkers() {
-      // Retrieve the value of the 'user' cookie
-      const user = Cookies.get('user');
-      if (user) {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${user}`
+      const jwtToken = getJwtTokenFromCookie();
+      if (jwtToken) {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`
         axios.get(`http://${IpConstants}:8080/Management/GetBots`)
           .then((res) => {
             this.data = [];
             this.data = res.data.bots;
+            this.isLoggedIn = true;
           })
           .catch((error) => {
             // eslint-disable-next-line
@@ -61,7 +83,15 @@ export default {
             } else
               console.error(error);
           });
+      } else {
+        this.isLoggedIn = false;
       }
+    },
+    loggedIn() {
+      const jwtToken = getJwtTokenFromCookie()
+      if (jwtToken !== undefined && jwtToken !== false)
+        this.isLoggedIn = true;
+      return jwtToken !== undefined && jwtToken !== false
     },
   },
   mounted() {
@@ -69,7 +99,9 @@ export default {
 
     setInterval(() => {
       this.getAllWorkers();
-    }, 10000);
+    }, 1000);
+
+    this.loggedIn()
   }
 };
 </script>
