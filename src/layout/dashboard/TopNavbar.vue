@@ -2,10 +2,9 @@
   <nav class="navbar navbar-expand-lg navbar-absolute sticky-top " style="border-bottom:2px solid white;"
        :class="{'bg-black': !showMenu, 'navbar-transparent': showMenu}">
     <div class="container-fluid">
-      <div class="container-fluid" >
+      <div class="container-fluid">
         <div class="navbar-wrapper">
-          <a class="navbar-brand" style="width: 50%; margin: auto 41% ; font-size: 36px; font-weight:bold;" href="">DotNetBotNet</a>
-          <div class="" style="display: inline-flex; width: 25%;">
+          <div class="" style="display: inline-flex; margin-top: 1%; width: 25%;">
             <base-button v-if="loggedIn === false" block type="default" class=" mb-3" @click="showLogin = true" style="width: 48%;
                                       padding-left:5%;padding-right:5%;margin-right: 1%;text-align:center;color:white;">
               Sign In
@@ -93,8 +92,8 @@
             </modal>
           </div>
           <div class="col-form-label-sm">
-
-          </div>
+            <a class="navbar-brand" style="width: 50%; margin-top: 1%; margin-left: 80%; font-size: 36px; font-weight:bold;position: sticky;" href="">DotNetBotNet</a>
+        </div>
         </div>
       </div>
       <collapse-transition>

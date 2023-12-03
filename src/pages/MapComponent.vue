@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div id="map" style="height: 500px; width: 800px"></div>
+    <div style="margin-left: 15%; margin-top: 5%; width: auto;">
+      <h1 style="margin-left: 43%;">Bot Locations</h1>
+      <div id="map" style="margin-top:2%;height: 500px; width: 800px"></div>
+    </div>
   </div>
 </template>
 

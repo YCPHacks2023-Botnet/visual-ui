@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <side-bar>
+    <side-bar style="margin-top: 7%;">
       <template slot="links">
         <sidebar-link
           v-for="(link, index) in data"
