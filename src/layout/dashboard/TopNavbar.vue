@@ -232,6 +232,7 @@
         this.password = '';
         this.isDisabled = true;
         Cookies.remove('user');
+        this.isDisabled = false;
         this.isLoggedIn = false;
       },
       loggedIn() {
