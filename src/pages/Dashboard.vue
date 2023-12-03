@@ -9,7 +9,7 @@
           <div  style="margin-right: 5%; width: 45%;">
             <tasks-to-complete/>
           </div>
-          <div style="margin-left: 5%; width: 45%;">
+          <div style="margin-left: 0%; width: 45%;">
             <completed-tasks/>
           </div>
         </div>
@@ -50,6 +50,7 @@
   import IpConstants from "@/pages/store/IpConstants";
   import Cookies from "js-cookie";
   import LocationAdapter from "@/pages/store/adapter/LocationAdapter";
+  import {getJwtTokenFromCookie} from "@/pages/store/adapter/cookieUtils";
 
   export default {
     components: {
@@ -69,14 +70,12 @@
     },
     methods: {
       getTasksToComplete() {
-        // Retrieve the value of the 'user' cookie
-        const user = Cookies.get('user');
-        if (user) {
-          axios.defaults.headers.common['Authorization'] = `Bearer ${user}`
+        const jwtToken = getJwtTokenFromCookie();
+        if (jwtToken) {
+          axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`
           axios.get(`http://${IpConstants}:8080/Management/GetBotInfo?bot_id=${this.id}`)
             .then((res) => {
               this.worker = new WorkerAdapter(res.data.bot);
-              // state.commit(StoreMutations.SET_ALL_COMPLETED_TASKS, res.data);
             })
             .catch((error) => {
               // eslint-disable-next-line
@@ -88,10 +87,9 @@
         }
       },
       getAllWorkers() {
-        // Retrieve the value of the 'user' cookie
-        const user = Cookies.get('user');
-        if (user) {
-          axios.defaults.headers.common['Authorization'] = `Bearer ${user}`
+        const jwtToken = getJwtTokenFromCookie();
+        if (jwtToken) {
+          axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`
           axios.get(`http://${IpConstants}:8080/Management/GetBots`)
             .then((res) => {
               this.locationData = [];
@@ -102,6 +100,7 @@
               // eslint-disable-next-line
               if (error.response.status === 401) {
                 Cookies.remove('user');
+                this.locationData = [];
               } else
                 console.error(error);
             });

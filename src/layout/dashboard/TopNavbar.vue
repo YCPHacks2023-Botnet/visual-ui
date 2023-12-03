@@ -5,8 +5,8 @@
       <div class="container-fluid">
         <div class="navbar-wrapper">
           <div class="" style="display: inline-flex; margin-top: 1%; width: 25%;">
-            <base-button v-if="loggedIn === false" block type="default" class=" mb-3" @click="showLogin = true" style="width: 48%;
-                                      padding-left:5%;padding-right:5%;margin-right: 1%;text-align:center;color:white;">
+            <base-button v-if="isLoggedIn === false" block type="default" class=" mb-3" @click="showLogin = true" style="width: 48%;
+            padding-left:5%;padding-right:5%;margin-right: 1%;text-align:center;color:white;">
               Sign In
             </base-button>
             <modal :show.sync="showLogin"
@@ -44,7 +44,7 @@
                 </template>
               </card>
             </modal>
-            <base-dropdown v-if="loggedIn === true"
+            <base-dropdown v-if="isLoggedIn === true"
                            block type="default"
                            title-classes="btn btn-info"
                            style="width: 48%;
@@ -52,7 +52,7 @@
                                   padding-right:5%;
                                   margin-right: 10%;
                                   text-align:center;"
-                                  :title="getUsernameForButton()">
+                           :title="getUsernameForButton()">
               <base-button class="dropdown-item" style="background: red; color: white; width: 90%;" @click="logout">Sign Out</base-button>
             </base-dropdown>
 
@@ -93,7 +93,7 @@
           </div>
           <div class="col-form-label-sm">
             <a class="navbar-brand" style="width: 50%; margin-top: 1%; margin-left: 80%; font-size: 36px; font-weight:bold;position: sticky;" href="">DotNetBotNet</a>
-        </div>
+          </div>
         </div>
       </div>
       <collapse-transition>
@@ -109,121 +109,140 @@
   </nav>
 </template>
 <script>
-  import { CollapseTransition } from 'vue2-transitions';
-  import Modal from '@/components/Modal'
-  import axios from "axios";
-  import WorkerAdapter from "@/pages/store/adapter/WorkerAdapter";
-  import IpConstants from "@/pages/store/IpConstants";
-  import Cookies from 'js-cookie';
+import { CollapseTransition } from 'vue2-transitions';
+import Modal from '@/components/Modal'
+import axios from "axios";
+import WorkerAdapter from "@/pages/store/adapter/WorkerAdapter";
+import IpConstants from "@/pages/store/IpConstants";
+import Cookies from 'js-cookie';
+import {getJwtTokenFromCookie, getUserNameFromCookie} from "@/pages/store/adapter/cookieUtils";
 
-  export default {
-    components: {
-      CollapseTransition,
-      Modal
+export default {
+  components: {
+    CollapseTransition,
+    Modal
+  },
+  computed: {
+    routeName() {
+      const { name } = this.$route;
+      return this.capitalizeFirstLetter(name);
     },
-    computed: {
-      routeName() {
-        const { name } = this.$route;
-        return this.capitalizeFirstLetter(name);
-      },
-      isRTL() {
-        return this.$rtl.isRTL;
-      }
-    },
-    data() {
-      return {
-        activeNotifications: false,
-        showMenu: false,
-        searchModalVisible: false,
-        searchQuery: '',
-
-        showLogin: false,
-        enableTasksButton: false,
-        remember: false,
-        showAddMoreTasks: false,
-        username: '',
-        password: '',
-        isDisabled: true,
-        loginFailure: false,
-        loggedIn: false,
-        numTasks: 100,
-        interval: 15
-      };
-    },
-    methods: {
-      capitalizeFirstLetter(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-      },
-      toggleNotificationDropDown() {
-        this.activeNotifications = !this.activeNotifications;
-      },
-      closeDropDown() {
-        this.activeNotifications = false;
-      },
-      toggleSidebar() {
-        this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
-      },
-      hideSidebar() {
-        this.$sidebar.displaySidebar(false);
-      },
-      toggleMenu() {
-        this.showMenu = !this.showMenu;
-      },
-      addMoreTasks() {
-        this.showAddMoreTasks = false;
-        let count = this.numTasks;
-        let interval = this.interval;
-        axios.post(`http://${IpConstants}:8080/Management/QueueTask`, {
-          Task: "DDOS",
-          Count: count,
-          TaskParameters: {
-            Interval: interval,
-            Address: "73.175.139.33"
-          }
-        })
-          .then((res) => {
-            this.worker = new WorkerAdapter(res.data.bot);
-            // state.commit(StoreMutations.SET_ALL_COMPLETED_TASKS, res.data);
-          })
-          .catch((error) => {
-            // eslint-disable-next-line
-            console.error(error);
-          });
-        this.numTasks = 100;
-        this.interval = 15;
-      },
-      login() {
-        axios.post(`http://${IpConstants}:8080/Management/Login`, { Username: this.username, Password: this.password}, null)
-          .then(resp => {
-            console.log(resp)
-            // Successful login
-            console.log("Login successful");
-            this.loginFailure = false; // takes away error message
-            this.showLogin = false; // hides login modal
-            this.isDisabled = false; // enables the add tasks button
-            this.loggedIn = true;
-
-            // if remember me was checked
-            if (this.remember === true) {
-              console.log("we need to do something with this");
-            }
-            Cookies.set('user', resp.data, { expires: 1 });
-          })
-          .catch(() => {
-            // Invalid credentials
-            console.log("Invalid username or password");
-            this.loginFailure = true;
-          })
-      },
-      getUsernameForButton() {
-        return "Hello, " + this.username + "!";
-      },
-      logout() {
-        this.username = '';
-        this.password = '';
-        this.loggedIn = false;
-        this.isDisabled = true;
-      }
+    isRTL() {
+      return this.$rtl.isRTL;
     }
-  };
+  },
+  data() {
+    return {
+      activeNotifications: false,
+      showMenu: false,
+      searchModalVisible: false,
+      searchQuery: '',
+
+      isLoggedIn: false,
+      showLogin: false,
+      enableTasksButton: false,
+      remember: false,
+      showAddMoreTasks: false,
+      username: '',
+      password: '',
+      isDisabled: true,
+      loginFailure: false,
+      numTasks: 100,
+      interval: 15
+    };
+  },
+  methods: {
+    capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    },
+    toggleNotificationDropDown() {
+      this.activeNotifications = !this.activeNotifications;
+    },
+    closeDropDown() {
+      this.activeNotifications = false;
+    },
+    toggleSidebar() {
+      this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
+    },
+    hideSidebar() {
+      this.$sidebar.displaySidebar(false);
+    },
+    toggleMenu() {
+      this.showMenu = !this.showMenu;
+    },
+    addMoreTasks() {
+      this.showAddMoreTasks = false;
+      let count = this.numTasks;
+      let interval = this.interval;
+      axios.post(`http://${IpConstants}:8080/Management/QueueTask`, {
+        Task: "DDOS",
+        Count: count,
+        TaskParameters: {
+          Interval: interval,
+          Address: "73.175.139.33"
+        }
+      })
+        .then((res) => {
+          this.worker = new WorkerAdapter(res.data.bot);
+          // state.commit(StoreMutations.SET_ALL_COMPLETED_TASKS, res.data);
+        })
+        .catch((error) => {
+          // eslint-disable-next-line
+          console.error(error);
+        });
+      this.numTasks = 100;
+      this.interval = 15;
+    },
+    login() {
+      axios.post(`http://${IpConstants}:8080/Management/Login`, { Username: this.username, Password: this.password}, null)
+        .then(resp => {
+          console.log(resp)
+          // Successful login
+          console.log("Login successful");
+          this.loginFailure = false; // takes away error message
+          this.showLogin = false; // hides login modal
+          this.isDisabled = false; // enables the add tasks button
+          this.isLoggedIn = true;
+
+          // if remember me was checked
+          if (this.remember === true) {
+            console.log("we need to do something with this");
+          }
+          // Assuming resp.data contains the JWT and this.username contains the username
+          const jwtToken = resp.data;
+          const username = this.username;
+          // Convert the object to a JSON string
+          const jsonString = JSON.stringify({ jwtToken, username });
+
+          // Set the cookie with the JWT and username
+          Cookies.set('user', jsonString, { expires: 1 });
+        })
+        .catch(() => {
+          // Invalid credentials
+          console.log("Invalid username or password");
+          this.loginFailure = true;
+        })
+    },
+    getUsernameForButton() {
+      return "Hello, " + getUserNameFromCookie() + "!";
+    },
+    logout() {
+      this.username = '';
+      this.password = '';
+      this.isDisabled = true;
+      Cookies.remove('user');
+      this.isLoggedIn = false;
+    },
+    loggedIn() {
+      const jwtToken = getJwtTokenFromCookie()
+      if (jwtToken !== undefined && jwtToken !== false)
+        this.isLoggedIn = true;
+      this.isDisabled = false;
+      return jwtToken !== undefined && jwtToken !== false
+    },
+  },
+  mounted() {
+    this.loggedIn();
+  }
+};
 </script>
