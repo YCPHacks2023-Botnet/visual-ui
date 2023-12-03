@@ -3,6 +3,7 @@
     <div class="row">
       <map-component
         :location-list="locationData"
+        :is-worker="worker === null"
       />
       <template v-if="id === null">
         <div class="" style="display: flex; margin-top: 5%; width: 110%;">
@@ -64,7 +65,7 @@
     data() {
       return {
         id: null,
-        worker: new WorkerAdapter(),
+        worker: null,
         locationData: []
       }
     },
